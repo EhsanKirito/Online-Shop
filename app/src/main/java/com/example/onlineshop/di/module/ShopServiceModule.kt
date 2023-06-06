@@ -7,6 +7,7 @@ import com.example.onlineshop.di.BaseUrl
 import com.example.onlineshop.di.ConsumerKey
 import com.example.onlineshop.di.ConsumerSecret
 import com.example.onlineshop.util.api.provideApi
+import com.example.onlineshop.util.networkconsts.ServiceConsts.BASE_URL
 import com.example.onlineshop.util.networkconsts.ServiceConsts.CONSUMER_KEY
 import com.example.onlineshop.util.networkconsts.ServiceConsts.CONSUMER_KEY_VALUE
 import com.example.onlineshop.util.networkconsts.ServiceConsts.CONSUMER_SECRET
@@ -36,6 +37,11 @@ object ShopServiceModule {
     @Singleton
     @ConsumerSecret
     fun provideConsumerSecret(): String = CONSUMER_SECRET
+
+    @Provides
+    @Singleton
+    @BaseUrl
+    fun provideBaseUrl(): String = BASE_URL
 
     @Provides
     @Singleton
