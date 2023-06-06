@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface ShopApiService {
 
-    @GET("https://woocommerce.maktabsharif.ir/wp-json/wc/v3/products")
+    @GET("/wp-json/wc/v3/products")
     suspend fun getProducts(
         @Query("page") page: Int
     ):Response<com.example.onlineshop.data.network.model.dto.product.ProductDto>

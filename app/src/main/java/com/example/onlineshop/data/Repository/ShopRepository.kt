@@ -1,6 +1,5 @@
 package com.example.onlineshop.data.Repository
 
-import com.example.onlineshop.data.network.model.dto.product.Product
 import com.example.onlineshop.data.network.model.ui.ProductItem
 import com.example.onlineshop.data.network.remotedatasource.ShopRemoteDataSource
 import com.example.onlineshop.data.network.safeapicall.ResponseState
