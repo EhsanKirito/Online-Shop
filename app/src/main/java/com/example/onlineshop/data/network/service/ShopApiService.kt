@@ -9,9 +9,9 @@ import retrofit2.http.Query
 
 interface ShopApiService {
 
-    @GET("/wp-json/wc/v3/products")
+    @GET("/wp-json/wc/v3/products?page=1")
     suspend fun getProducts(
-        @Query("page") page: Int
+//        @Query("page" ) page:Int = 1
     ): Response<ProductDto>
 
     @GET("/wp-json/wc/v3/products/<id>")

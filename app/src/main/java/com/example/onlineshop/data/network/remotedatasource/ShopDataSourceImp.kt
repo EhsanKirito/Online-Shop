@@ -10,13 +10,12 @@ import kotlinx.coroutines.flow.map
 
 class ShopDataSourceImp(private val shopApiService: ShopApiService):ShopRemoteDataSource {
     override fun getProducts(page: Int): Flow<List<ProductItem>> =
-        safeApiCall {shopApiService.getProducts(page)}.map{
-            it.map{
-                it.ProductToProductItem()
-            }
+        safeApiCall {shopApiService.getProducts()}.map{
+            it.ProductDtoToProductItem()
+
         }
+
 
     override fun getProduct(id: Int): Flow<ProductItem> =
         safeApiCall {shopApiService.getProduct(id)}.map{it.ProductToProductItem()}
-
 }

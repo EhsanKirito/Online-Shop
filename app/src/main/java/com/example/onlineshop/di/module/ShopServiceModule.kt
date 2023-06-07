@@ -50,12 +50,12 @@ object ShopServiceModule {
             val url = chain.request()
                 .url
                 .newBuilder()
+                .addQueryParameter(CONSUMER_KEY_VALUE, ck)
+                .addQueryParameter(CONSUMER_SECRET_VALUE, cs)
                 .build()
             val request = chain.request()
                 .newBuilder()
                 .url(url)
-                .addHeader(CONSUMER_KEY_VALUE, ck)
-                .addHeader(CONSUMER_SECRET_VALUE, cs)
                 .build()
             chain.proceed(request)
         }
@@ -95,7 +95,7 @@ object ShopServiceModule {
     @Singleton
     @Provides
     fun provideMovieService(retrofit: Retrofit): ShopApiService =
-        provideApi<ShopApiService>(retrofit)
+        provideApi(retrofit)
 
     @Singleton
     @Provides
