@@ -1,4 +1,4 @@
-package com.example.onlineshop.ui.notifications
+package com.example.onlineshop.ui.features.notifications
 
 import androidx.fragment.app.Fragment
 import com.example.onlineshop.databinding.FragmentNotificationsBinding

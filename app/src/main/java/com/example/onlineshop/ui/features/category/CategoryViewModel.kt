@@ -1,4 +1,4 @@
-package com.example.onlineshop.ui.dashboard
+package com.example.onlineshop.ui.features.category
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(private val shopRepository: ShopRepository)  : ViewModel() {
+class CategoryViewModel @Inject constructor(private val shopRepository: ShopRepository)  : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
