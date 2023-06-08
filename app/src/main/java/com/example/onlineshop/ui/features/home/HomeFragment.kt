@@ -1,7 +1,6 @@
 package com.example.onlineshop.ui.features.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.onlineshop.databinding.FragmentHomeBinding
 import com.example.onlineshop.ui.features.home.adapter.HomeAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,12 +19,12 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel : HomeViewModel by viewModels()
 
-    private lateinit var adapter1: HomeAdapter
-    private lateinit var adapter2: HomeAdapter
-    private lateinit var adapter3: HomeAdapter
-    private lateinit var recyclerView1: RecyclerView
-    private lateinit var recyclerView2: RecyclerView
-    private lateinit var recyclerView3: RecyclerView
+    private lateinit var adapterNewest: HomeAdapter
+    private lateinit var adapterMostVisited: HomeAdapter
+    private lateinit var adapterBest: HomeAdapter
+    private lateinit var recyclerViewNewest: RecyclerView
+    private lateinit var recyclerViewMostVisited: RecyclerView
+    private lateinit var recyclerViewBest: RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,52 +42,52 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerViewInit1()
-        recyclerViewInit2()
-        recyclerViewInit3()
+        recyclerViewInitNewest()
+        recyclerViewInitMostVisited()
+        recyclerViewInitBest()
 
 
 
 
     }
 
-    fun recyclerViewInit1(){
-        recyclerView1 = binding.rvnewest
-        recyclerView1.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, true)
-        adapter1 = HomeAdapter {
+    fun recyclerViewInitNewest(){
+        recyclerViewNewest = binding.rvnewest
+        recyclerViewNewest.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, true)
+        adapterNewest = HomeAdapter {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToDetailsFragment(it)
             )
         }
-        recyclerView1.adapter = adapter1
+        recyclerViewNewest.adapter = adapterNewest
         viewModel.products.observe(viewLifecycleOwner){
-            adapter1.submitList(it)
+            adapterNewest.submitList(it)
         }
     }
-    fun recyclerViewInit2(){
-        recyclerView2 = binding.rvmostvisited
-        recyclerView2.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, true)
-        adapter2 = HomeAdapter {
+    fun recyclerViewInitMostVisited(){
+        recyclerViewMostVisited = binding.rvmostvisited
+        recyclerViewMostVisited.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, true)
+        adapterMostVisited = HomeAdapter {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToDetailsFragment(it)
             )
         }
-        recyclerView2.adapter = adapter2
+        recyclerViewMostVisited.adapter = adapterMostVisited
         viewModel.products.observe(viewLifecycleOwner){
-            adapter2.submitList(it)
+            adapterMostVisited.submitList(it)
         }
     }
-    fun recyclerViewInit3(){
-        recyclerView3 = binding.rvbest
-        recyclerView3.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, true)
-        adapter3 = HomeAdapter {
+    fun recyclerViewInitBest(){
+        recyclerViewBest = binding.rvbest
+        recyclerViewBest.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, true)
+        adapterBest = HomeAdapter {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToDetailsFragment(it)
             )
         }
-        recyclerView3.adapter = adapter1
+        recyclerViewBest.adapter = adapterNewest
         viewModel.products.observe(viewLifecycleOwner){
-            adapter3.submitList(it)
+            adapterBest.submitList(it)
         }
     }
 

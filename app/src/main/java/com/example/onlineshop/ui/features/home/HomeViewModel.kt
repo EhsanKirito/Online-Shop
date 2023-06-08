@@ -26,22 +26,16 @@ init {
     var page = 1
 
     fun getProducts(){
-        Log.e("job", "start api" )
         if(job?.isActive == true) {
-            Log.e("job", "job is active" )
             job?.cancel()
         }
         job = viewModelScope.launch {
-            Log.e("job", "corotine" )
             shopRepository.getProducts(page).collectLatest{
-                Log.e("job", "collect: $page" )
                 when(it){
                     is ResponseState.Error -> Log.e("Home", "getProducts: failed" )
                     ResponseState.Loading -> Log.e("Home", "Loading Products")
                     is ResponseState.Success -> {
-                        Log.e("job", "data" )
                         _products!!.postValue(it.data)
-                        Log.e("job", "${it.data}" )
                     }
                 }
             }

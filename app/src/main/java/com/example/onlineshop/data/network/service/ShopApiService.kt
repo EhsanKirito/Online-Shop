@@ -14,7 +14,7 @@ interface ShopApiService {
 //        @Query("page" ) page:Int = 1
     ): Response<ProductDto>
 
-    @GET("/wp-json/wc/v3/products/<id>")
+    @GET("/wp-json/wc/v3/products/{id}")
     suspend fun getProduct(
         @Path("id") id: Int
     ): Response<Product>

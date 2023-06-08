@@ -1,4 +1,4 @@
-package com.example.onlineshop.ui.features
+package com.example.onlineshop.ui.main
 
 
 import android.os.Bundle

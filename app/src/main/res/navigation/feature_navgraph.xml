@@ -38,7 +38,7 @@
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" >
         <argument
-            android:name="id"
+            android:name="productId"
             app:argType="integer" />
     </fragment>
 </navigation>

@@ -12,5 +12,5 @@ class ShopRepository @Inject constructor(
 ) {
     fun getProducts(page:Int): Flow<ResponseState<List<ProductItem>>> =shopRemoteDataSource.getProducts(page).asResponseState()
 
-    fun getProduct(id:Int): Flow<ResponseState<List<ProductItem>>> =shopRemoteDataSource.getProducts(id).asResponseState()
+    fun getProduct(id:Int): Flow<ResponseState<ProductItem>> =shopRemoteDataSource.getProduct(id).asResponseState()
 }

@@ -9,4 +9,4 @@ fun ArrayList<Product>.ProductDtoToProductItem():List<ProductItem> {
     } ?: emptyList()
 }
 
-fun Product.ProductToProductItem() = ProductItem(id, name, description, price, images?.get(0)?.src)
+fun Product.ProductToProductItem() = ProductItem(id, name, description, price, images?.get(0)?.src, images)

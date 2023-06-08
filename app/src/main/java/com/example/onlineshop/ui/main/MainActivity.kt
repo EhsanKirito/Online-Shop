@@ -1,4 +1,4 @@
-package com.example.onlineshop.ui
+package com.example.onlineshop.ui.main
 
 
 import androidx.appcompat.app.AppCompatActivity
