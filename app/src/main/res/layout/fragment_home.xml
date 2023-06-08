@@ -13,55 +13,88 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="جدیدترین محصولات"
             android:layout_marginEnd="20dp"
+            android:text="جدیدترین محصولات"
             app:layout_constraintBottom_toTopOf="@id/rvnewest"
-            app:layout_constraintEnd_toEndOf="@id/rvnewest"/>
+            app:layout_constraintEnd_toEndOf="@id/rvnewest" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvnewest"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="300dp"
             android:layout_marginTop="200dp"
-            />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="پربازدیدترین محصولات"
             android:layout_marginEnd="20dp"
             android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/rvmostvisited"/>
+            android:text="پربازدیدترین محصولات"
+            app:layout_constraintBottom_toTopOf="@+id/rvmostvisited"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvmostvisited"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
+            android:layout_marginTop="80dp"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvnewest"
-            android:layout_marginTop="80dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvnewest" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="بهترین محصولات"
             android:layout_marginEnd="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/rvbest"/>
+            android:text="بهترین محصولات"
+            app:layout_constraintBottom_toTopOf="@+id/rvbest"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvbest"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="300dp"
+            android:layout_marginTop="80dp"
             android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvmostvisited"
-            android:layout_marginTop="80dp"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvmostvisited" />
+
+        <ProgressBar
+            android:id="@+id/progressBarBest"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="126dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/rvbest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rvbest" />
+
+        <ProgressBar
+            android:id="@+id/progressBarNewest"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/rvnewest"
+            app:layout_constraintEnd_toEndOf="@+id/rvnewest"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rvnewest" />
+
+        <ProgressBar
+            android:id="@+id/progressBarMostViewed"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/rvmostvisited"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rvmostvisited" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

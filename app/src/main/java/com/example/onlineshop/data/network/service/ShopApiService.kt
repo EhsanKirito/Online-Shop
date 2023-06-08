@@ -9,14 +9,42 @@ import retrofit2.http.Query
 
 interface ShopApiService {
 
-    @GET("/wp-json/wc/v3/products?page=1")
-    suspend fun getProducts(
-//        @Query("page" ) page:Int = 1
-    ): Response<ProductDto>
-
     @GET("/wp-json/wc/v3/products/{id}")
     suspend fun getProduct(
         @Path("id") id: Int
     ): Response<Product>
 
+    @GET("/wp-json/wc/v3/products")
+    suspend fun getNewestProducts(
+        @Query("page") page: Int = 1,
+        @Query("per_page") perPage: Int = 10,
+        @Query("orderby") orderBy: String = "date"
+    ): Response<ProductDto>
+
+    @GET("/wp-json/wc/v3/products")
+    suspend fun getMostViewedProducts(
+        @Query("page") page: Int = 1,
+        @Query("per_page") perPage: Int = 10,
+        @Query("orderby") orderBy: String = "popularity"
+    ): Response<ProductDto>
+
+    @GET("/wp-json/wc/v3/products")
+    suspend fun getBestProducts(
+        @Query("page") page: Int = 1,
+        @Query("per_page") perPage: Int = 10,
+        @Query("orderby") orderBy: String = "rating"
+    ): Response<ProductDto>
+
+//    @GET("products/categories")
+//    suspend fun getAllCategories(
+//        @Query("page") page: Int = 1,
+//        @Query("per_page") perPage: Int = 10,
+//    ): List<ProductsCategoryItemsDto>
+//
+//    @GET("products/")
+//    suspend fun getCategoriesByIds(
+//        @Query("page") page: Int = 1,
+//        @Query("per_page") perPage: Int = 10,
+//        @Query("category") category: String
+//    ): List<ProductsItemsDto>
 }

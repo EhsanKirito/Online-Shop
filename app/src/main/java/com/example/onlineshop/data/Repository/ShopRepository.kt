@@ -10,7 +10,9 @@ import javax.inject.Inject
 class ShopRepository @Inject constructor(
     private val shopRemoteDataSource: ShopRemoteDataSource
 ) {
-    fun getProducts(page:Int): Flow<ResponseState<List<ProductItem>>> =shopRemoteDataSource.getProducts(page).asResponseState()
-
     fun getProduct(id:Int): Flow<ResponseState<ProductItem>> =shopRemoteDataSource.getProduct(id).asResponseState()
+
+    fun getNewestProducts(): Flow<ResponseState<List<ProductItem>>> =shopRemoteDataSource.getNewestProducts().asResponseState()
+    fun getMostViewedProducts(): Flow<ResponseState<List<ProductItem>>> =shopRemoteDataSource.getMostViewedProducts().asResponseState()
+    fun getBestProducts(): Flow<ResponseState<List<ProductItem>>> =shopRemoteDataSource.getBestProducts().asResponseState()
 }

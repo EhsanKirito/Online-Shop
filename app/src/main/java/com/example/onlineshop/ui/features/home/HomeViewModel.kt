@@ -10,6 +10,8 @@ import com.example.onlineshop.data.network.model.ui.ProductItem
 import com.example.onlineshop.data.network.safeapicall.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,27 +19,46 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val shopRepository: ShopRepository): ViewModel() {
 
-    val _products = MutableLiveData<List<ProductItem>>()
-        val products: LiveData<List<ProductItem>> = _products
-init {
-    getProducts()
-}
-    var job: Job? = null
-    var page = 1
+    private val _productNewest =
+        MutableStateFlow<ResponseState<List<ProductItem>>>(ResponseState.Loading)
+    val productNewest: StateFlow<ResponseState<List<ProductItem>>> = _productNewest
 
-    fun getProducts(){
-        if(job?.isActive == true) {
-            job?.cancel()
+    private val _productMostVisited =
+        MutableStateFlow<ResponseState<List<ProductItem>>>(ResponseState.Loading)
+    val productMostVisited: StateFlow<ResponseState<List<ProductItem>>> = _productMostVisited
+
+    private val _productBest =
+        MutableStateFlow<ResponseState<List<ProductItem>>>(ResponseState.Loading)
+    val productBest: StateFlow<ResponseState<List<ProductItem>>> = _productBest
+
+init {
+    getProductNewest()
+    getMostViewedProducts()
+    getBestProducts()
+}
+
+
+    fun getProductNewest(){
+
+        viewModelScope.launch {
+            shopRepository.getNewestProducts().collect { responseState ->
+                _productNewest.emit(responseState)
+            }
         }
-        job = viewModelScope.launch {
-            shopRepository.getProducts(page).collectLatest{
-                when(it){
-                    is ResponseState.Error -> Log.e("Home", "getProducts: failed" )
-                    ResponseState.Loading -> Log.e("Home", "Loading Products")
-                    is ResponseState.Success -> {
-                        _products!!.postValue(it.data)
-                    }
-                }
+    }
+
+    fun getMostViewedProducts(){
+        viewModelScope.launch {
+            shopRepository.getMostViewedProducts().collect { responseState ->
+                _productMostVisited.emit(responseState)
+            }
+        }
+    }
+
+    fun getBestProducts(){
+        viewModelScope.launch {
+            shopRepository.getBestProducts().collect { responseState ->
+                _productBest.emit(responseState)
             }
         }
     }

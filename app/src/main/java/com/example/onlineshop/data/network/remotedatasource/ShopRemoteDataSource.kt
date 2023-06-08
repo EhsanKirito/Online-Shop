@@ -7,7 +7,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface ShopRemoteDataSource {
 
-    fun getProducts(page:Int): Flow<List<ProductItem>>
-
     fun getProduct(id:Int): Flow<ProductItem>
+
+    fun getNewestProducts(): Flow<List<ProductItem>>
+    fun getMostViewedProducts(): Flow<List<ProductItem>>
+    fun getBestProducts(): Flow<List<ProductItem>>
 }
