@@ -1,5 +1,7 @@
 package com.example.onlineshop.data.network.service
 
+import com.example.onlineshop.data.network.model.dto.category.CategoryDto
+import com.example.onlineshop.data.network.model.dto.category.CategoryDtoItem
 import com.example.onlineshop.data.network.model.dto.product.Product
 import com.example.onlineshop.data.network.model.dto.product.ProductDto
 import retrofit2.Response
@@ -35,16 +37,16 @@ interface ShopApiService {
         @Query("orderby") orderBy: String = "rating"
     ): Response<ProductDto>
 
-//    @GET("products/categories")
-//    suspend fun getAllCategories(
-//        @Query("page") page: Int = 1,
-//        @Query("per_page") perPage: Int = 10,
-//    ): List<ProductsCategoryItemsDto>
-//
-//    @GET("products/")
-//    suspend fun getCategoriesByIds(
-//        @Query("page") page: Int = 1,
-//        @Query("per_page") perPage: Int = 10,
-//        @Query("category") category: String
-//    ): List<ProductsItemsDto>
+    @GET("products/categories")
+    suspend fun getAllCategories(
+        @Query("page") page: Int = 1,
+        @Query("per_page") perPage: Int = 10,
+    ): Response<CategoryDto>
+
+    @GET("products/")
+    suspend fun getCategoriesById(
+        @Query("page") page: Int = 1,
+        @Query("per_page") perPage: Int = 10,
+        @Path("id") id: Int
+    ): Response<CategoryDtoItem>
 }

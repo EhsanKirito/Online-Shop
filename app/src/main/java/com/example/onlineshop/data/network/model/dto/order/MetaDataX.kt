@@ -1,7 +1,0 @@
-package com.example.onlineshop.data.network.model.dto.order
-
-data class MetaDataX(
-    val id: Int?,
-    val key: String?,
-    val value: String?
-)

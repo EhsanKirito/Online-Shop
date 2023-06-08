@@ -1,10 +1,12 @@
 package com.example.onlineshop.data.network.remotedatasource
 
+import com.example.onlineshop.data.network.model.ui.CategoryItem
 import com.example.onlineshop.data.network.model.ui.ProductItem
 import com.example.onlineshop.data.network.safeapicall.safeApiCall
 import com.example.onlineshop.data.network.service.ShopApiService
 import com.example.onlineshop.util.converter.ProductDtoToProductItem
 import com.example.onlineshop.util.converter.ProductToProductItem
+import com.example.onlineshop.util.converter.toCategoryItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -20,5 +22,12 @@ class ShopDataSourceImp(private val shopApiService: ShopApiService):ShopRemoteDa
 
     override fun getBestProducts(): Flow<List<ProductItem>> =
         safeApiCall { shopApiService.getBestProducts() }.map { it.ProductDtoToProductItem() }
+
+    override fun getAllCategories(): Flow<List<CategoryItem>> =
+        safeApiCall { shopApiService.getAllCategories() }.map {it.toCategoryItem()}
+
+    override fun getCategoriesById(id:Int): Flow<CategoryItem> =
+        safeApiCall { shopApiService.getCategoriesById(id=id) }.map { it.toCategoryItem() }
+
 
 }
