@@ -1,4 +1,4 @@
-package com.example.onlineshop.ui.features.details
+package com.example.onlineshop.ui.features.productdetails
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

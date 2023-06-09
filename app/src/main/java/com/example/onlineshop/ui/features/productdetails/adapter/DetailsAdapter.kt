@@ -1,4 +1,4 @@
-package com.example.onlineshop.ui.features.details.adapter
+package com.example.onlineshop.ui.features.productdetails.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

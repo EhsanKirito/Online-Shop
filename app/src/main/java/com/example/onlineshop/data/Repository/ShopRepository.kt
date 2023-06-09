@@ -18,5 +18,5 @@ class ShopRepository @Inject constructor(
     fun getBestProducts(): Flow<ResponseState<List<ProductItem>>> = shopRemoteDataSource.getBestProducts().asResponseState()
 
     fun getAllCategories(): Flow<ResponseState<List<CategoryItem>>> = shopRemoteDataSource.getAllCategories().asResponseState()
-    fun getCategoriesById(id:Int): Flow<ResponseState<CategoryItem>> = shopRemoteDataSource.getCategoriesById(id).asResponseState()
+    fun getCategoriesById(id:Int): Flow<ResponseState<List<ProductItem>>> = shopRemoteDataSource.getCategoriesById(id).asResponseState()
 }

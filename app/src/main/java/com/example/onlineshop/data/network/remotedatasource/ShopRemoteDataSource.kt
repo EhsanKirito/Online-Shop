@@ -17,5 +17,5 @@ interface ShopRemoteDataSource {
 
     fun getAllCategories(): Flow<List<CategoryItem>>
 
-    fun getCategoriesById(id:Int): Flow<CategoryItem>
+    fun getCategoriesById(id:Int): Flow<List<ProductItem>>
 }

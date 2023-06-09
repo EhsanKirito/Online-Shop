@@ -1,5 +1,4 @@
-package com.example.onlineshop.ui.features.details
-
+package com.example.onlineshop.ui.features.categorydetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,27 +15,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onlineshop.data.network.model.ui.ProductItem
 import com.example.onlineshop.data.network.safeapicall.ResponseState
-import com.example.onlineshop.databinding.FragmentDetailsBinding
-import com.example.onlineshop.ui.features.details.adapter.DetailsAdapter
+import com.example.onlineshop.databinding.FragmentCategoryDetailsBinding
+import com.example.onlineshop.ui.features.categorydetails.adapter.CategoryDetailsAdapter
+import com.example.onlineshop.ui.features.productdetails.adapter.DetailsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class DetailsFragment : Fragment() {
-    private var _binding: FragmentDetailsBinding? = null
+class CategoryDetailsFragment : Fragment() {
+    private var _binding: FragmentCategoryDetailsBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: DetailsViewModel by viewModels()
+    private val viewModel: CategoryDetailsViewModel by viewModels()
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: DetailsAdapter
+    private lateinit var adapter: CategoryDetailsAdapter
+
     companion object {
-        const val PRODUCT_ID = "productId"
+        const val CATEGORY_ID = "categoryId"
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentCategoryDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -49,9 +51,15 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerViewInit()
+        collectData()
+
+
+    }
+
+    private fun collectData() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.productDetails.collect { responseState ->
+                viewModel.categoryDetails.collect { responseState ->
                     when (responseState) {
                         is ResponseState.Error -> {
                             Toast.makeText(
@@ -59,44 +67,33 @@ class DetailsFragment : Fragment() {
                                 "ERROOOOOOOOOOOOOOOOOOR",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            binding.progressBar.isInvisible = true
+                            binding.progressBarCategoryDetails.isInvisible = true
                         }
 
                         ResponseState.Loading -> {
                             binding.apply {
-                                progressBar.isInvisible = false
-                                group.isInvisible = true
+                                progressBarCategoryDetails.isInvisible = false
+
                             }
                         }
 
                         is ResponseState.Success -> {
-                            binding.progressBar.isInvisible = true
-                            binding.group.isInvisible = false
-                            setToUi(responseState.data)
+                            binding.progressBarCategoryDetails.isInvisible = true
+                            adapter.submitList(responseState.data)
                         }
                     }
                 }
             }
         }
-
     }
 
-    private fun setToUi(productItem: ProductItem) {
-        binding.apply {
-            txtName.text = productItem.name
-            txtPrice.text = productItem.price
-            txtDescription.text = productItem.desc
-        }
-        adapter.submitList(productItem.imageUrls)
-    }
-    fun recyclerViewInit(){
-        recyclerView = binding.rvProductImages
-        recyclerView.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, true)
-        adapter = DetailsAdapter {}
+    fun recyclerViewInit() {
+        recyclerView = binding.rvCategoryDetails
+        recyclerView.layoutManager =
+            LinearLayoutManager(binding.root.context)
+        adapter = CategoryDetailsAdapter {}
         recyclerView.adapter = adapter
 
 
-
     }
-
 }

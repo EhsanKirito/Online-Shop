@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="جدیدترین محصولات"
+            android:text="@string/newestProducts"
             app:layout_constraintBottom_toTopOf="@id/rvnewest"
             app:layout_constraintEnd_toEndOf="@id/rvnewest" />
 
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:orientation="horizontal"
-            android:text="پربازدیدترین محصولات"
+            android:text="@string/mostViewedProducts"
             app:layout_constraintBottom_toTopOf="@+id/rvmostvisited"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
-            android:text="بهترین محصولات"
+            android:text="@string/bestProducts"
             app:layout_constraintBottom_toTopOf="@+id/rvbest"
             app:layout_constraintEnd_toEndOf="parent" />
 

@@ -2,40 +2,37 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="160dp"
-    android:layout_height="300dp"
-    android:background="#D1D1D1"
-    android:layout_margin="10dp">
+    android:layout_width="match_parent"
+    android:background="#C6CFD6"
+    android:layout_height="200dp">
 
 
     <ImageView
-        android:id="@+id/productposter"
-        android:layout_width="143dp"
-        android:layout_height="143dp"
+        android:id="@+id/productPoster"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.71000004"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
-        android:id="@+id/txtname"
+        android:id="@+id/txtProductName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="product name"
-        app:layout_constraintBottom_toTopOf="@+id/productposter"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/productPoster"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/productPoster" />
 
     <TextView
-        android:id="@+id/txtprice"
+        android:id="@+id/txtProductPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="product price"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toStartOf="@+id/productPoster"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productposter" />
+        app:layout_constraintTop_toBottomOf="@+id/txtProductName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

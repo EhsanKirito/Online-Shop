@@ -1,7 +1,7 @@
-package com.example.onlineshop.ui.features.category
+package com.example.onlineshop.ui.features.productdetails
+
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,34 +12,33 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.onlineshop.R
+import com.example.onlineshop.data.network.model.ui.ProductItem
 import com.example.onlineshop.data.network.safeapicall.ResponseState
-import com.example.onlineshop.databinding.FragmentCategoryBinding
-import com.example.onlineshop.databinding.FragmentHomeBinding
-import com.example.onlineshop.ui.features.category.adapter.CategoryAdapter
-import com.example.onlineshop.ui.features.home.HomeFragmentDirections
-import com.example.onlineshop.ui.features.home.HomeViewModel
-import com.example.onlineshop.ui.features.home.adapter.HomeAdapter
+import com.example.onlineshop.databinding.FragmentDetailsBinding
+import com.example.onlineshop.ui.features.productdetails.adapter.DetailsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CategoryFragment : Fragment(R.layout.fragment_category) {
-    private var _binding: FragmentCategoryBinding? = null
-    private val viewModel : CategoryViewModel by viewModels()
+class DetailsFragment : Fragment() {
+    private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var adapterCategory: CategoryAdapter
-    private lateinit var recyclerViewCategory: RecyclerView
+    private val viewModel: DetailsViewModel by viewModels()
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: DetailsAdapter
+
+    companion object {
+        const val PRODUCT_ID = "productId"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCategoryBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -51,21 +50,16 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerViewInitCategory()
+        recyclerViewInit()
+        collectData()
+
+
     }
 
-    private fun recyclerViewInitCategory() {
-        recyclerViewCategory = binding.rvCategoryList
-        recyclerViewCategory.layoutManager = GridLayoutManager(binding.root.context, 2)
-        adapterCategory = CategoryAdapter {
-            findNavController().navigate(
-                CategoryFragmentDirections.toCategoryDetailsFragment(it)
-            )
-        }
-        recyclerViewCategory.adapter = adapterCategory
+    private fun collectData() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.categoryList.collect { responseState ->
+                viewModel.productDetails.collect { responseState ->
                     when (responseState) {
                         is ResponseState.Error -> {
                             Toast.makeText(
@@ -73,22 +67,44 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
                                 "ERROOOOOOOOOOOOOOOOOOR",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            binding.progressBarCategory.isInvisible = true
+                            binding.progressBar.isInvisible = true
                         }
 
                         ResponseState.Loading -> {
                             binding.apply {
-                                progressBarCategory.isInvisible = false
+                                progressBar.isInvisible = false
+                                group.isInvisible = true
                             }
                         }
 
                         is ResponseState.Success -> {
-                            binding.progressBarCategory.isInvisible = true
-                            adapterCategory.submitList(responseState.data)
+                            binding.progressBar.isInvisible = true
+                            binding.group.isInvisible = false
+                            setToUi(responseState.data)
                         }
                     }
                 }
             }
         }
     }
+
+    private fun setToUi(productItem: ProductItem) {
+        binding.apply {
+            txtName.text = productItem.name
+            txtPrice.text = productItem.price
+            txtDescription.text = productItem.desc
+        }
+        adapter.submitList(productItem.imageUrls)
+    }
+
+    fun recyclerViewInit() {
+        recyclerView = binding.rvProductImages
+        recyclerView.layoutManager =
+            LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, true)
+        adapter = DetailsAdapter {}
+        recyclerView.adapter = adapter
+
+
+    }
+
 }

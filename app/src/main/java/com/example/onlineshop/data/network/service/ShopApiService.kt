@@ -48,5 +48,5 @@ interface ShopApiService {
         @Query("page") page: Int = 1,
         @Query("per_page") perPage: Int = 10,
         @Path("id") id: Int
-    ): Response<CategoryDtoItem>
+    ): Response<ProductDto>
 }

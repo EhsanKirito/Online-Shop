@@ -3,6 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_category">Category</string>
     <string name="title_notifications">Notifications</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="newestProducts">جدیدترین محصولات</string>
+    <string name="mostViewedProducts">پربازدیدترین محصولات</string>
+    <string name="bestProducts">بهترین محصولات</string>
 </resources>

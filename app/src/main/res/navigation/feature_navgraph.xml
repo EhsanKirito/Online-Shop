@@ -20,25 +20,29 @@
         android:label="fragment_category"
         tools:layout="@layout/fragment_category" >
         <action
-            android:id="@+id/action_categoryFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
+            android:id="@+id/to_categoryDetailsFragment"
+            app:destination="@id/categoryDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/notificationsFragment"
         android:name="com.example.onlineshop.ui.features.notifications.NotificationsFragment"
         android:label="fragment_notifications"
-        tools:layout="@layout/fragment_notifications" >
-        <action
-            android:id="@+id/action_notificationsFragment_to_detailsFragment"
-            app:destination="@id/detailsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_notifications" />
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.onlineshop.ui.features.details.DetailsFragment"
+        android:name="com.example.onlineshop.ui.features.productdetails.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" >
         <argument
             android:name="productId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryDetailsFragment"
+        android:name="com.example.onlineshop.ui.features.categorydetails.CategoryDetailsFragment"
+        android:label="fragment_category_details"
+        tools:layout="@layout/fragment_category_details" >
+        <argument android:name="categoryId"
             app:argType="integer" />
     </fragment>
 </navigation>
