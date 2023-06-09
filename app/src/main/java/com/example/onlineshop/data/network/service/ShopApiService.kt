@@ -37,13 +37,13 @@ interface ShopApiService {
         @Query("orderby") orderBy: String = "rating"
     ): Response<ProductDto>
 
-    @GET("products/categories")
+    @GET("/wp-json/wc/v3/products/categories")
     suspend fun getAllCategories(
         @Query("page") page: Int = 1,
         @Query("per_page") perPage: Int = 10,
     ): Response<CategoryDto>
 
-    @GET("products/")
+    @GET("/wp-json/wc/v3/products/")
     suspend fun getCategoriesById(
         @Query("page") page: Int = 1,
         @Query("per_page") perPage: Int = 10,
