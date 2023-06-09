@@ -44,5 +44,8 @@
         tools:layout="@layout/fragment_category_details" >
         <argument android:name="categoryId"
             app:argType="integer" />
+        <action
+            android:id="@+id/todetailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
 </navigation>

@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.onlineshop.R
 import com.example.onlineshop.data.network.safeapicall.ResponseState
 import com.example.onlineshop.databinding.FragmentHomeBinding
 import com.example.onlineshop.ui.features.home.adapter.HomeAdapter
@@ -71,7 +72,7 @@ class HomeFragment : Fragment() {
                         is ResponseState.Error -> {
                             Toast.makeText(
                                 requireContext(),
-                                "ERROOOOOOOOOOOOOOOOOOR",
+                                R.string.networkError,
                                 Toast.LENGTH_SHORT
                             ).show()
                             binding.progressBarNewest.isInvisible = true
@@ -108,7 +109,7 @@ class HomeFragment : Fragment() {
                         is ResponseState.Error -> {
                             Toast.makeText(
                                 requireContext(),
-                                "ERROOOOOOOOOOOOOOOOOOR",
+                                R.string.networkError,
                                 Toast.LENGTH_SHORT
                             ).show()
                             binding.progressBarMostViewed.isInvisible = true
@@ -145,7 +146,7 @@ class HomeFragment : Fragment() {
                         is ResponseState.Error -> {
                             Toast.makeText(
                                 requireContext(),
-                                "ERROOOOOOOOOOOOOOOOOOR",
+                                R.string.networkError,
                                 Toast.LENGTH_SHORT
                             ).show()
                             binding.progressBarBest.isInvisible = true

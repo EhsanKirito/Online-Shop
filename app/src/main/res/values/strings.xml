@@ -6,4 +6,5 @@
     <string name="newestProducts">جدیدترین محصولات</string>
     <string name="mostViewedProducts">پربازدیدترین محصولات</string>
     <string name="bestProducts">بهترین محصولات</string>
+    <string name="networkError">Could Not Establish Connection With Server</string>
 </resources>

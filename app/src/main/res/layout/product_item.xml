@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="160dp"
     android:layout_height="300dp"
-    android:background="#D1D1D1"
+    android:background="#D6D6D6"
     android:layout_margin="10dp">
 
 

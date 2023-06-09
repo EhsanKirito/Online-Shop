@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.onlineshop.R
 import com.example.onlineshop.data.network.model.ui.ProductItem
 import com.example.onlineshop.data.network.safeapicall.ResponseState
 import com.example.onlineshop.databinding.FragmentDetailsBinding
@@ -64,7 +65,7 @@ class DetailsFragment : Fragment() {
                         is ResponseState.Error -> {
                             Toast.makeText(
                                 requireContext(),
-                                "ERROOOOOOOOOOOOOOOOOOR",
+                                R.string.networkError,
                                 Toast.LENGTH_SHORT
                             ).show()
                             binding.progressBar.isInvisible = true

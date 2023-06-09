@@ -21,6 +21,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
@@ -75,6 +76,8 @@ object ShopServiceModule {
         interceptor: Interceptor,
         httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient = OkHttpClient.Builder()
+        .readTimeout(20, TimeUnit.SECONDS)
+        .writeTimeout(20, TimeUnit.SECONDS)
         .addInterceptor(httpLoggingInterceptor)
         .addInterceptor(interceptor)
         .build()

@@ -1,7 +1,6 @@
 package com.example.onlineshop.ui.features.category
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,23 +13,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onlineshop.R
 import com.example.onlineshop.data.network.safeapicall.ResponseState
 import com.example.onlineshop.databinding.FragmentCategoryBinding
-import com.example.onlineshop.databinding.FragmentHomeBinding
 import com.example.onlineshop.ui.features.category.adapter.CategoryAdapter
-import com.example.onlineshop.ui.features.home.HomeFragmentDirections
-import com.example.onlineshop.ui.features.home.HomeViewModel
-import com.example.onlineshop.ui.features.home.adapter.HomeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CategoryFragment : Fragment(R.layout.fragment_category) {
     private var _binding: FragmentCategoryBinding? = null
-    private val viewModel : CategoryViewModel by viewModels()
+    private val viewModel: CategoryViewModel by viewModels()
     private val binding get() = _binding!!
     private lateinit var adapterCategory: CategoryAdapter
     private lateinit var recyclerViewCategory: RecyclerView
@@ -57,9 +51,9 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
     private fun recyclerViewInitCategory() {
         recyclerViewCategory = binding.rvCategoryList
         recyclerViewCategory.layoutManager = GridLayoutManager(binding.root.context, 2)
-        adapterCategory = CategoryAdapter {
+        adapterCategory = CategoryAdapter { categoryId ->
             findNavController().navigate(
-                CategoryFragmentDirections.toCategoryDetailsFragment(it)
+                CategoryFragmentDirections.toCategoryDetailsFragment(categoryId)
             )
         }
         recyclerViewCategory.adapter = adapterCategory
@@ -70,7 +64,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
                         is ResponseState.Error -> {
                             Toast.makeText(
                                 requireContext(),
-                                "ERROOOOOOOOOOOOOOOOOOR",
+                                R.string.networkError,
                                 Toast.LENGTH_SHORT
                             ).show()
                             binding.progressBarCategory.isInvisible = true

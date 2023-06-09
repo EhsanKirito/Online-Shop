@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#8E8E8E"
     tools:context=".ui.features.productdetails.DetailsFragment">
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="100dp"
@@ -19,14 +22,18 @@
         android:id="@+id/rvProductImages"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:textSize="20sp"
         android:text="name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvProductImages" />
@@ -36,16 +43,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        android:textSize="25sp"
         android:text="price"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
     <TextView
         android:id="@+id/txtDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="334dp"
+        android:layout_height="132dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
         android:text="description"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtPrice" />
 
@@ -54,5 +65,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="txtDescription,txtPrice,txtName,rvProductImages" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,6 +1,7 @@
 package com.example.onlineshop.ui.features.categorydetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +12,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.onlineshop.R
 import com.example.onlineshop.data.network.model.ui.ProductItem
 import com.example.onlineshop.data.network.safeapicall.ResponseState
 import com.example.onlineshop.databinding.FragmentCategoryDetailsBinding
 import com.example.onlineshop.ui.features.categorydetails.adapter.CategoryDetailsAdapter
+import com.example.onlineshop.ui.features.home.HomeFragmentDirections
 import com.example.onlineshop.ui.features.productdetails.adapter.DetailsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -59,18 +63,22 @@ class CategoryDetailsFragment : Fragment() {
     private fun collectData() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                Log.e("TAG", "collectData: before collect" )
                 viewModel.categoryDetails.collect { responseState ->
+                    Log.e("TAG", "collectData: before when" )
                     when (responseState) {
                         is ResponseState.Error -> {
+                            Log.e("TAG", "collectData: ${responseState.error}" )
                             Toast.makeText(
                                 requireContext(),
-                                "ERROOOOOOOOOOOOOOOOOOR",
+                                R.string.networkError,
                                 Toast.LENGTH_SHORT
                             ).show()
                             binding.progressBarCategoryDetails.isInvisible = true
                         }
 
                         ResponseState.Loading -> {
+                            Log.e("TAG", "collectData: loading" )
                             binding.apply {
                                 progressBarCategoryDetails.isInvisible = false
 
@@ -78,6 +86,7 @@ class CategoryDetailsFragment : Fragment() {
                         }
 
                         is ResponseState.Success -> {
+                            Log.e("TAG", "collectData: success" )
                             binding.progressBarCategoryDetails.isInvisible = true
                             adapter.submitList(responseState.data)
                         }
@@ -91,9 +100,11 @@ class CategoryDetailsFragment : Fragment() {
         recyclerView = binding.rvCategoryDetails
         recyclerView.layoutManager =
             LinearLayoutManager(binding.root.context)
-        adapter = CategoryDetailsAdapter {}
+        adapter = CategoryDetailsAdapter {productId->
+            findNavController().navigate(
+                CategoryDetailsFragmentDirections.todetailsFragment(productId)
+            )
+        }
         recyclerView.adapter = adapter
-
-
     }
 }
