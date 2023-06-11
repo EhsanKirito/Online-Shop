@@ -43,8 +43,8 @@ interface ShopApiService {
         @Query("per_page") perPage: Int = 10,
     ): Response<CategoryDto>
 
-    @GET("/wp-json/wc/v3/products/{id}")
+    @GET("/wp-json/wc/v3/products")
     suspend fun getCategoriesById(
-        @Path("id") id: Int,
+        @Query("category") category:Int
     ): Response<ProductDto>
 }

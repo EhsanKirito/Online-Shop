@@ -138,7 +138,7 @@ class HomeFragment : Fragment() {
                 HomeFragmentDirections.actionHomeFragmentToDetailsFragment(it)
             )
         }
-        recyclerViewBest.adapter = adapterNewest
+        recyclerViewBest.adapter = adapterBest
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.productBest.collect { responseState ->

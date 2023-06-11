@@ -27,7 +27,7 @@ class ShopDataSourceImp(private val shopApiService: ShopApiService):ShopRemoteDa
         safeApiCall { shopApiService.getAllCategories() }.map {it.toCategoryItem()}
 
     override fun getCategoriesById(id:Int): Flow<List<ProductItem>> =
-        safeApiCall { shopApiService.getCategoriesById(id=id) }.map { it.ProductDtoToProductItem() }
+        safeApiCall { shopApiService.getCategoriesById(id) }.map { it.ProductDtoToProductItem() }
 
 
 }

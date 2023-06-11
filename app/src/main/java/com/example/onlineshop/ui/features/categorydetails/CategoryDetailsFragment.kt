@@ -63,12 +63,9 @@ class CategoryDetailsFragment : Fragment() {
     private fun collectData() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                Log.e("TAG", "collectData: before collect" )
                 viewModel.categoryDetails.collect { responseState ->
-                    Log.e("TAG", "collectData: before when" )
                     when (responseState) {
                         is ResponseState.Error -> {
-                            Log.e("TAG", "collectData: ${responseState.error}" )
                             Toast.makeText(
                                 requireContext(),
                                 R.string.networkError,
@@ -76,17 +73,12 @@ class CategoryDetailsFragment : Fragment() {
                             ).show()
                             binding.progressBarCategoryDetails.isInvisible = true
                         }
-
                         ResponseState.Loading -> {
-                            Log.e("TAG", "collectData: loading" )
                             binding.apply {
                                 progressBarCategoryDetails.isInvisible = false
-
                             }
                         }
-
                         is ResponseState.Success -> {
-                            Log.e("TAG", "collectData: success" )
                             binding.progressBarCategoryDetails.isInvisible = true
                             adapter.submitList(responseState.data)
                         }
