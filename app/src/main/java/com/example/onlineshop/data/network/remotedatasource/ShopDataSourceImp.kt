@@ -10,9 +10,9 @@ import com.example.onlineshop.util.converter.toCategoryItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class ShopDataSourceImp(private val shopApiService: ShopApiService):ShopRemoteDataSource {
+class ShopDataSourceImp(private val shopApiService: ShopApiService) : ShopRemoteDataSource {
     override fun getProduct(id: Int): Flow<ProductItem> =
-        safeApiCall {shopApiService.getProduct(id)}.map{it.ProductToProductItem()}
+        safeApiCall { shopApiService.getProduct(id) }.map { it.ProductToProductItem() }
 
     override fun getNewestProducts(): Flow<List<ProductItem>> =
         safeApiCall { shopApiService.getNewestProducts() }.map { it.ProductDtoToProductItem() }
@@ -24,10 +24,13 @@ class ShopDataSourceImp(private val shopApiService: ShopApiService):ShopRemoteDa
         safeApiCall { shopApiService.getBestProducts() }.map { it.ProductDtoToProductItem() }
 
     override fun getAllCategories(): Flow<List<CategoryItem>> =
-        safeApiCall { shopApiService.getAllCategories() }.map {it.toCategoryItem()}
+        safeApiCall { shopApiService.getAllCategories() }.map { it.toCategoryItem() }
 
-    override fun getCategoriesById(id:Int): Flow<List<ProductItem>> =
+    override fun getCategoriesById(id: Int): Flow<List<ProductItem>> =
         safeApiCall { shopApiService.getCategoriesById(id) }.map { it.ProductDtoToProductItem() }
+
+    override fun getFeatureProducts(featured: Boolean): Flow<List<ProductItem>> =
+        safeApiCall { shopApiService.getFeatureProducts(featured) }.map { it.ProductDtoToProductItem() }
 
 
 }

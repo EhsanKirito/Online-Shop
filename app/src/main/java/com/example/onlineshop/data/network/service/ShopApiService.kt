@@ -47,4 +47,9 @@ interface ShopApiService {
     suspend fun getCategoriesById(
         @Query("category") category:Int
     ): Response<ProductDto>
+
+    @GET("/wp-json/wc/v3/products")
+    suspend fun getFeatureProducts(
+        @Query("featured") featured:Boolean
+    ): Response<ProductDto>
 }

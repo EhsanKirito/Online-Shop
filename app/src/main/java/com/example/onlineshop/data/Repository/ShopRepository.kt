@@ -12,11 +12,10 @@ class ShopRepository @Inject constructor(
     private val shopRemoteDataSource: ShopRemoteDataSource
 ) {
     fun getProduct(id:Int): Flow<ResponseState<ProductItem>> = shopRemoteDataSource.getProduct(id).asResponseState()
-
     fun getNewestProducts(): Flow<ResponseState<List<ProductItem>>> = shopRemoteDataSource.getNewestProducts().asResponseState()
     fun getMostViewedProducts(): Flow<ResponseState<List<ProductItem>>> = shopRemoteDataSource.getMostViewedProducts().asResponseState()
     fun getBestProducts(): Flow<ResponseState<List<ProductItem>>> = shopRemoteDataSource.getBestProducts().asResponseState()
-
     fun getAllCategories(): Flow<ResponseState<List<CategoryItem>>> = shopRemoteDataSource.getAllCategories().asResponseState()
     fun getCategoriesById(id:Int): Flow<ResponseState<List<ProductItem>>> = shopRemoteDataSource.getCategoriesById(id).asResponseState()
+    fun getFeatureProducts(featured:Boolean): Flow<ResponseState<List<ProductItem>>> = shopRemoteDataSource.getFeatureProducts(featured).asResponseState()
 }
