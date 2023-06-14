@@ -31,10 +31,15 @@ class HomeViewModel @Inject constructor(private val shopRepository: ShopReposito
         MutableStateFlow<ResponseState<List<ProductItem>>>(ResponseState.Loading)
     val productBest: StateFlow<ResponseState<List<ProductItem>>> = _productBest
 
+    private val _productFeatured =
+        MutableStateFlow<ResponseState<List<ProductItem>>>(ResponseState.Loading)
+    val productFeatured: StateFlow<ResponseState<List<ProductItem>>> = _productFeatured
+
 init {
     getProductNewest()
     getMostViewedProducts()
     getBestProducts()
+    getFeaturedProducts()
 }
 
 
@@ -59,6 +64,14 @@ init {
         viewModelScope.launch {
             shopRepository.getBestProducts().collect { responseState ->
                 _productBest.emit(responseState)
+            }
+        }
+    }
+
+    fun getFeaturedProducts(){
+        viewModelScope.launch {
+            shopRepository.getFeatureProducts().collect { responseState ->
+                _productFeatured.emit(responseState)
             }
         }
     }

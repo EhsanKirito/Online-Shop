@@ -1,6 +1,8 @@
 package com.example.onlineshop.ui.features.home
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +16,16 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.onlineshop.R
+import com.example.onlineshop.data.network.model.ui.ProductItem
 import com.example.onlineshop.data.network.safeapicall.ResponseState
 import com.example.onlineshop.databinding.FragmentHomeBinding
 import com.example.onlineshop.ui.features.home.adapter.HomeAdapter
+import com.example.onlineshop.ui.features.home.adapter.SliderAdapter
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
+import com.smarteist.autoimageslider.SliderAnimations
+import com.smarteist.autoimageslider.SliderView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -33,6 +41,8 @@ class HomeFragment : Fragment() {
     private lateinit var recyclerViewNewest: RecyclerView
     private lateinit var recyclerViewMostViewed: RecyclerView
     private lateinit var recyclerViewBest: RecyclerView
+    private lateinit var slider:SliderView
+    private lateinit var adapterSlider:SliderAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -53,8 +63,60 @@ class HomeFragment : Fragment() {
         recyclerViewInitNewest()
         recyclerViewInitMostViewed()
         recyclerViewInitBest()
+        viewPagerInit()
 
     }
+
+    private fun setSlider(list:List<ProductItem>) {
+        slider = binding.imageSlider
+        adapterSlider = SliderAdapter(this.requireContext())
+        for (i in list){
+            adapterSlider.addItem(i)
+        }
+        slider.setSliderAdapter(adapterSlider)
+        slider.setIndicatorAnimation(IndicatorAnimationType.WORM)
+        slider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
+        slider.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH)
+        slider.setIndicatorSelectedColor(Color.WHITE)
+        slider.setIndicatorUnselectedColor(Color.GRAY)
+        slider.setScrollTimeInSec(5)
+
+        slider.startAutoCycle()
+    }
+
+    private fun viewPagerInit(){
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.productFeatured.collect { responseState ->
+                    when (responseState) {
+                        is ResponseState.Error -> {
+                            Log.e("TAG", "viewPagerInit: error", )
+                            Toast.makeText(
+                                requireContext(),
+                                R.string.networkError,
+                                Toast.LENGTH_SHORT
+                            ).show()
+//                            binding.progressBarNewest.isInvisible = true
+                        }
+
+                        ResponseState.Loading -> {
+                            Log.e("TAG", "viewPagerInit: loading", )
+//                            binding.apply {
+//                                progressBarNewest.isInvisible = false
+//                            }
+                        }
+
+                        is ResponseState.Success -> {
+//                            binding.progressBarNewest.isInvisible = true
+                            Log.e("TAG", "viewPagerInit: success", )
+                            setSlider(responseState.data)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     fun recyclerViewInitNewest(){
         recyclerViewNewest = binding.rvnewest

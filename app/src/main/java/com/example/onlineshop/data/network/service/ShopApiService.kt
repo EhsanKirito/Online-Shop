@@ -49,7 +49,7 @@ interface ShopApiService {
     ): Response<ProductDto>
 
     @GET("/wp-json/wc/v3/products")
-    suspend fun getFeatureProducts(
-        @Query("featured") featured:Boolean
+    suspend fun getSearchedProducts(
+        @Query("search") search:String
     ): Response<ProductDto>
 }

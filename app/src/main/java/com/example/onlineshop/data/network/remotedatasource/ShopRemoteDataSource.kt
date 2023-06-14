@@ -18,5 +18,7 @@ interface ShopRemoteDataSource {
 
     fun getCategoriesById(id: Int): Flow<List<ProductItem>>
 
-    fun getFeatureProducts(featured: Boolean): Flow<List<ProductItem>>
+    fun getFeaturedProducts(categoryId: Int): Flow<List<ProductItem>>
+
+    fun getSearchedProducts(search: String): Flow<List<ProductItem>>
 }
