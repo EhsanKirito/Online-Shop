@@ -7,4 +7,40 @@
     <string name="mostViewedProducts">پربازدیدترین محصولات</string>
     <string name="bestProducts">بهترین محصولات</string>
     <string name="networkError">Could Not Establish Connection With Server</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">جستجو</string>
+    <string name="buyList">سبد خرید</string>
+    <string name="signinup">ورود - ثبت نام</string>
+
+    <string-array name="search_order">
+        <item>زیاد به کم</item>
+        <item>کم به زیاد</item>
+    </string-array>
+    <string-array name="search_orderby">
+        <item>پرفروش</item>
+        <item>قیمت</item>
+        <item>جدید</item>
+    </string-array>
+    <string-array name="search_category">
+        <item>بهداشت</item>
+        <item>پوشاک زنانه</item>
+        <item>پوشاک مردانه</item>
+        <item>دیجیتال</item>
+        <item>ساعت و مچ بند هوشمند</item>
+        <item>سوپر مارکت</item>
+        <item>فیلم</item>
+        <item>کتاب و هنر</item>
+        <item>کتاب و مجلات</item>
+        <item>فروش ویژه</item>
+        <item>کفش</item>
+        <item>کیف و کوله</item>
+        <item>گوشی موبایل</item>
+        <item>لبنیات</item>
+        <item>مد و پوشاک</item>
+        <item>لوازم منزل</item>
+        <item>نوشیدنی ها</item>
+        <item>مواد پروتئینی</item>
+    </string-array>
+
+
 </resources>
