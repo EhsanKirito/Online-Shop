@@ -10,6 +10,7 @@ import com.example.onlineshop.data.network.model.ui.ProductItem
 import com.example.onlineshop.data.network.safeapicall.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -18,6 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val shopRepository: ShopRepository): ViewModel() {
+
 
     private val _productNewest =
         MutableStateFlow<ResponseState<List<ProductItem>>>(ResponseState.Loading)
@@ -35,6 +37,7 @@ class HomeViewModel @Inject constructor(private val shopRepository: ShopReposito
         MutableStateFlow<ResponseState<List<ProductItem>>>(ResponseState.Loading)
     val productFeatured: StateFlow<ResponseState<List<ProductItem>>> = _productFeatured
 
+
 init {
     getProductNewest()
     getMostViewedProducts()
@@ -51,6 +54,8 @@ init {
             }
         }
     }
+
+
 
     fun getMostViewedProducts(){
         viewModelScope.launch {

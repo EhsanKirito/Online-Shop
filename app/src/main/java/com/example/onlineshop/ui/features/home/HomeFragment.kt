@@ -16,7 +16,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
 import com.example.onlineshop.R
 import com.example.onlineshop.data.network.model.ui.ProductItem
 import com.example.onlineshop.data.network.safeapicall.ResponseState
@@ -63,8 +62,13 @@ class HomeFragment : Fragment() {
         recyclerViewInitNewest()
         recyclerViewInitMostViewed()
         recyclerViewInitBest()
-        viewPagerInit()
+        sliderInit()
 
+        binding.txtSearch.setOnClickListener {
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToSearchFragment()
+            )
+        }
     }
 
     private fun setSlider(list:List<ProductItem>) {
@@ -84,7 +88,7 @@ class HomeFragment : Fragment() {
         slider.startAutoCycle()
     }
 
-    private fun viewPagerInit(){
+    private fun sliderInit(){
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.productFeatured.collect { responseState ->
@@ -229,5 +233,6 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
 
 }
