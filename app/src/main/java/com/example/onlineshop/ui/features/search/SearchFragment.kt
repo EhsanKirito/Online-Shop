@@ -78,7 +78,7 @@ class SearchFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 position: Int,
                 id: Long
             ) {
-                when (position)
+                when (position){
                     0 -> viewModel.order = "asc"
                     1 -> viewModel.order = "desc"
                 }
