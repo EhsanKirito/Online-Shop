@@ -4,20 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#818181"
     tools:context=".ui.features.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchHome"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txtSearch"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/search"
+            android:textSize="30sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/txtBuyList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/buyList"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/txtSearch"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtSign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/signinup"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/txtBuyList"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/imageSlider"
@@ -26,7 +46,7 @@
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchHome"
+            app:layout_constraintTop_toBottomOf="@+id/txtSearch"
             app:sliderAnimationDuration="600"
             app:sliderAutoCycleDirection="back_and_forth"
             app:sliderAutoCycleEnabled="true"
@@ -131,6 +151,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/rvmostvisited" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="progressBarMostViewed,progressBarNewest,progressBarBest,rvbest,rvmostvisited,rvnewest,textView,imageSlider" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
