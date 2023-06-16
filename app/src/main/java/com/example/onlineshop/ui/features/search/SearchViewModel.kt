@@ -24,7 +24,7 @@ class SearchViewModel @Inject constructor(private val shopRepository: ShopReposi
     var query = ""
     var category:Int = 52
     var orderby = "popularity"
-    var order = "desc"
+    var order = "asc"
 
     fun getProductSearch(){
         if(job?.isActive == true) {

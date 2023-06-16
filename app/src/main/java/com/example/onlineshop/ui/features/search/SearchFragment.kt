@@ -78,9 +78,9 @@ class SearchFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 position: Int,
                 id: Long
             ) {
-                when (position){
-                    0 -> viewModel.order = "desc"
-                    1 -> viewModel.order = "asc"
+                when (position)
+                    0 -> viewModel.order = "asc"
+                    1 -> viewModel.order = "desc"
                 }
             }
 
@@ -182,6 +182,7 @@ class SearchFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 if (p0 == ""){
                     viewModel.job?.cancel()
                 }else {
+                    viewModel.getProductSearch()
                     recyclerViewInitSearch(p0)
                 }
                 return true
@@ -193,12 +194,11 @@ class SearchFragment : Fragment(), AdapterView.OnItemSelectedListener {
         if (p0 != null) {
             viewModel.query = p0
         }
-        viewModel.getProductSearch()
         recyclerViewSearch = binding.rvSearch
         recyclerViewSearch.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.VERTICAL, true)
         adapterSearch = SearchAdapter {
             findNavController().navigate(
-                HomeFragmentDirections.actionHomeFragmentToDetailsFragment(it)
+                SearchFragmentDirections.actionSearchFragmentToDetailsFragment(it)
             )
         }
         recyclerViewSearch.adapter = adapterSearch
@@ -216,7 +216,6 @@ class SearchFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                         ResponseState.Loading -> {
                             binding.apply {
-                                rvSearch.isInvisible = true
                             }
                         }
 
