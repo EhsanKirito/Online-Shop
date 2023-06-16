@@ -40,7 +40,7 @@ interface ShopApiService {
     @GET("/wp-json/wc/v3/products/categories")
     suspend fun getAllCategories(
         @Query("page") page: Int = 1,
-        @Query("per_page") perPage: Int = 10,
+        @Query("per_page") perPage: Int = 30,
     ): Response<CategoryDto>
 
     @GET("/wp-json/wc/v3/products")
@@ -50,6 +50,14 @@ interface ShopApiService {
 
     @GET("/wp-json/wc/v3/products")
     suspend fun getSearchedProducts(
-        @Query("search") search:String
+        @Query("search") search:String,
+    ): Response<ProductDto>
+
+    @GET("/wp-json/wc/v3/products")
+    suspend fun getDetailedSearchedProducts(
+        @Query("search") search:String,
+        @Query("category") category:Int,
+        @Query("orderby") orderBy: String,
+        @Query("order") order: String
     ): Response<ProductDto>
 }

@@ -35,5 +35,15 @@ class ShopDataSourceImp(private val shopApiService: ShopApiService) : ShopRemote
     override fun getSearchedProducts(search: String): Flow<List<ProductItem>> =
         safeApiCall { shopApiService.getSearchedProducts(search) }.map { it.ProductDtoToProductItem() }
 
+    override fun getDetailedSearchedProducts(
+        search: String,
+        category: Int,
+        orderby: String,
+        order: String
+    ): Flow<List<ProductItem>> =
+        safeApiCall { shopApiService.getDetailedSearchedProducts(search, category, orderby, order) }
+            .map { it.ProductDtoToProductItem() }
+
+
 
 }

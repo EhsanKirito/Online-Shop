@@ -21,4 +21,6 @@ interface ShopRemoteDataSource {
     fun getFeaturedProducts(categoryId: Int): Flow<List<ProductItem>>
 
     fun getSearchedProducts(search: String): Flow<List<ProductItem>>
+
+    fun getDetailedSearchedProducts(search:String, category:Int, orderby:String, order:String): Flow<List<ProductItem>>
 }

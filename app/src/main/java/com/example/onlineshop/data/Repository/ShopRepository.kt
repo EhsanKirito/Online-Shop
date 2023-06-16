@@ -19,4 +19,10 @@ class ShopRepository @Inject constructor(
     fun getCategoriesById(id:Int): Flow<ResponseState<List<ProductItem>>> = shopRemoteDataSource.getCategoriesById(id).asResponseState()
     fun getFeatureProducts(): Flow<ResponseState<List<ProductItem>>> = shopRemoteDataSource.getFeaturedProducts(119).asResponseState()
     fun getSearchedProducts(query:String): Flow<ResponseState<List<ProductItem>>> = shopRemoteDataSource.getSearchedProducts(query).asResponseState()
+    fun getDetailedSearchedProducts(
+        search: String,
+        category: Int,
+        orderby: String,
+        order: String
+    ): Flow<ResponseState<List<ProductItem>>> = shopRemoteDataSource.getDetailedSearchedProducts(search, category, orderby, order).asResponseState()
 }
