@@ -39,7 +39,7 @@ class SliderAdapter(private val context: Context) :
 
     override fun onBindViewHolder(viewHolder: SliderAdapterVH, position: Int) {
         val sliderItem: ProductItem = mSliderItems[position]
-        viewHolder.textViewDescription.text = sliderItem.desc
+        viewHolder.textViewDescription.text = sliderItem.name
         viewHolder.textViewDescription.textSize = 16f
         viewHolder.textViewDescription.setTextColor(Color.BLACK)
         Glide.with(viewHolder.itemView)
