@@ -33,7 +33,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel : HomeViewModel by viewModels()
-
     private lateinit var adapterNewest: HomeAdapter
     private lateinit var adapterMostVisited: HomeAdapter
     private lateinit var adapterBest: HomeAdapter
@@ -59,11 +58,18 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUI()
+    }
+
+    private fun setupUI() {
         recyclerViewInitNewest()
         recyclerViewInitMostViewed()
         recyclerViewInitBest()
         sliderInit()
+        setListeners()
+    }
 
+    private fun setListeners() {
         binding.txtSearch.setOnClickListener {
             findNavController().navigate(
                 HomeFragmentDirections.actionHomeFragmentToSearchFragment()
@@ -81,7 +87,7 @@ class HomeFragment : Fragment() {
         slider.setIndicatorAnimation(IndicatorAnimationType.WORM)
         slider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION)
         slider.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH)
-        slider.setIndicatorSelectedColor(Color.WHITE)
+        slider.setIndicatorSelectedColor(Color.RED)
         slider.setIndicatorUnselectedColor(Color.GRAY)
         slider.setScrollTimeInSec(5)
 

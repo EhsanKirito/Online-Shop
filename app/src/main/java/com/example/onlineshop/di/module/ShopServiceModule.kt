@@ -76,8 +76,8 @@ object ShopServiceModule {
         interceptor: Interceptor,
         httpLoggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient = OkHttpClient.Builder()
-        .readTimeout(90, TimeUnit.SECONDS)
-        .writeTimeout(90, TimeUnit.SECONDS)
+        .readTimeout(190, TimeUnit.SECONDS)
+        .writeTimeout(190, TimeUnit.SECONDS)
         .addInterceptor(httpLoggingInterceptor)
         .addInterceptor(interceptor)
         .build()

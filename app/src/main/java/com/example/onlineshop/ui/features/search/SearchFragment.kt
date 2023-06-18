@@ -51,11 +51,14 @@ class SearchFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUI()
+    }
+
+    private fun setupUI() {
         spinnerOrderInit()
         spinnerOrderbyInit()
         spinnerCategoryInit()
         searchBoxInit()
-
     }
 
     private fun spinnerOrderInit() {
@@ -122,16 +125,15 @@ class SearchFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
     private fun spinnerCategoryInit() {
+        val myarray = arrayListOf("dfssa", "fdsdfd", "fdsfs")
         val spinnerCategory = binding.spnCategory
-        if (spinnerCategory != null) {
-            ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.search_category,
-                android.R.layout.simple_spinner_item
-            ).also {
-                it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                binding.spnCategory.adapter = it
-            }
+        ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            myarray
+        ).also {
+            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spnCategory.adapter = it
         }
         spinnerCategory.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
@@ -169,9 +171,6 @@ class SearchFragment : Fragment(), AdapterView.OnItemSelectedListener {
         }
     }
 
-
-
-
     fun searchBoxInit(){
         binding.searchHome.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
@@ -179,12 +178,12 @@ class SearchFragment : Fragment(), AdapterView.OnItemSelectedListener {
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
-                if (p0 == ""){
-                    viewModel.job?.cancel()
-                }else {
+//                if (p0 == ""){
+//                    viewModel.job?.cancel()
+//                }else {
                     viewModel.getProductSearch()
                     recyclerViewInitSearch(p0)
-                }
+//                }
                 return true
             }
         })

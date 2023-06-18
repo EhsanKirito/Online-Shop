@@ -54,6 +54,20 @@ interface ShopApiService {
     ): Response<ProductDto>
 
     @GET("/wp-json/wc/v3/products")
+    suspend fun getSearchedProductsForCategory(
+        @Query("search") search:String,
+        @Query("category") category:Int,
+    ): Response<ProductDto>
+
+    @GET("/wp-json/wc/v3/products/categories")
+    suspend fun getSearchedCategories(
+        @Query("search") search:String,
+        @Query("orderby") orderBy: String,
+        @Query("order") order: String
+    ): Response<ProductDto>
+
+
+    @GET("/wp-json/wc/v3/products")
     suspend fun getDetailedSearchedProducts(
         @Query("search") search:String,
         @Query("category") category:Int,
